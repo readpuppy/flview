@@ -1,0 +1,17 @@
+# Force the GNU linker from MSYS2 MinGW64.
+# This is useful on Windows machines without MSVC Build Tools.
+[target.x86_64-pc-windows-gnu]
+linker = "C:/msys64/mingw64/bin/gcc.exe"
+
+[alias]
+# Build a fully static Linux binary (musl + static CRT).
+release-static = "build --release --target x86_64-unknown-linux-musl"
+
+[target.x86_64-unknown-linux-musl]
+# Prefer a fully static binary ("ldd" should report "not a dynamic executable").
+rustflags = [
+	"-C",
+	"target-feature=+crt-static",
+	"-C",
+	"link-self-contained=yes",
+]
