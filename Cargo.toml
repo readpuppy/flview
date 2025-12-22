@@ -7,6 +7,14 @@ edition = "2021"
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
+bytes = "1"
+http = "1"
+http-body-util = "0.1"
+hyper = { version = "1", features = ["client", "http1"] }
+hyper-util = { version = "0.1", features = ["client", "http1", "tokio"] }
+rustls = { version = "0.23", default-features = false, features = ["aws_lc_rs"] }
+tokio-rustls = "0.26"
+webpki-roots = "0.26"
 
 # TUI
 crossterm = "0.28"

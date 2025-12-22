@@ -32,8 +32,7 @@ struct BrowseQuery {
 pub async fn run(root: PathBuf, addr: String) -> Result<()> {
     tracing_subscriber::fmt()
         .with_env_filter(
-            tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "info".into()),
+            tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()),
         )
         .init();
 
@@ -56,7 +55,10 @@ pub async fn run(root: PathBuf, addr: String) -> Result<()> {
     Ok(())
 }
 
-async fn index(State(st): State<AppState>, Query(q): Query<BrowseQuery>) -> Result<Html<String>, Response> {
+async fn index(
+    State(st): State<AppState>,
+    Query(q): Query<BrowseQuery>,
+) -> Result<Html<String>, Response> {
     let rel = q.path.clone().unwrap_or_default();
     let full = fsutil::resolve_under_root(&st.root, &rel).map_err(bad_request)?;
 
@@ -91,7 +93,9 @@ async fn view_file(
     .map_err(internal_error)?
     .map_err(internal_error)?;
 
-    Ok(Html(render_file_page(&full, &mode, &rel, Some(bytes)).await))
+    Ok(Html(
+        render_file_page(&full, &mode, &rel, Some(bytes)).await,
+    ))
 }
 
 async fn download(
@@ -267,8 +271,8 @@ async fn render_file_page(full: &Path, mode: &str, rel: &str, bytes: Option<Vec<
         urlenc(&parent_rel(rel)),
         urlenc(rel),
         urlenc(rel),
-                switch_to,
-                html_escape(switch_to),
+        switch_to,
+        html_escape(switch_to),
         content
     )
 }

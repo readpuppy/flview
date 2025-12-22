@@ -12,7 +12,9 @@ pub struct EntryInfo {
     pub name: OsString,
     pub path: PathBuf,
     pub is_dir: bool,
+    #[allow(dead_code)]
     pub size: u64,
+    #[allow(dead_code)]
     pub modified: Option<SystemTime>,
 }
 
@@ -84,6 +86,7 @@ pub fn resolve_under_root(root: &Path, rel: &str) -> Result<PathBuf> {
     Ok(canon)
 }
 
+#[allow(dead_code)]
 pub fn to_rel_string(root: &Path, full: &Path) -> String {
     match full.strip_prefix(root) {
         Ok(p) => p.to_string_lossy().replace('\\', "/"),

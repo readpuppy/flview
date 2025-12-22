@@ -59,7 +59,10 @@ pub fn run(root: PathBuf) -> Result<()> {
     result
 }
 
-fn run_app(terminal: &mut Terminal<CrosstermBackend<std::io::Stdout>>, root: PathBuf) -> Result<()> {
+fn run_app(
+    terminal: &mut Terminal<CrosstermBackend<std::io::Stdout>>,
+    root: PathBuf,
+) -> Result<()> {
     let mut state = AppState {
         cwd: root.clone(),
         root,
@@ -248,8 +251,14 @@ fn ui(f: &mut ratatui::Frame, state: &AppState) {
 
     // Right: preview
     let preview_title = match (&state.preview_path, state.preview_mode) {
-        (Some(p), PreviewMode::Text) => format!("Text: {}", p.file_name().unwrap_or_default().to_string_lossy()),
-        (Some(p), PreviewMode::Hex) => format!("Hex: {}", p.file_name().unwrap_or_default().to_string_lossy()),
+        (Some(p), PreviewMode::Text) => format!(
+            "Text: {}",
+            p.file_name().unwrap_or_default().to_string_lossy()
+        ),
+        (Some(p), PreviewMode::Hex) => format!(
+            "Hex: {}",
+            p.file_name().unwrap_or_default().to_string_lossy()
+        ),
         (None, PreviewMode::Text) => "Text".to_string(),
         (None, PreviewMode::Hex) => "Hex".to_string(),
     };
@@ -279,7 +288,8 @@ fn ui(f: &mut ratatui::Frame, state: &AppState) {
         }
     };
 
-    let preview = Paragraph::new(preview_text).block(Block::default().borders(Borders::ALL).title(preview_title));
+    let preview = Paragraph::new(preview_text)
+        .block(Block::default().borders(Borders::ALL).title(preview_title));
     f.render_widget(preview, main[1]);
 
     // Bottom status
