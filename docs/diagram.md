@@ -2,7 +2,7 @@
 
 ## Architecture
 
-`flview` has three user-facing modes (TUI, Web, Site) that share filesystem + preview helpers.
+`flview` has three user-facing modes (TUI, Web, Site) that share filesystem + preview helpers, which allows to use inside a K8S pod to check https and view file. The certificate validation can be ignored.
 
 ```mermaid
 flowchart LR
