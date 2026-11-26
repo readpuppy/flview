@@ -47,7 +47,7 @@ flowchart LR
 Notes:
 - `src/main.rs` is the single entrypoint and selects the mode based on the subcommand.
 - `src/fsutil.rs` and `src/hex.rs` are shared helpers used by both TUI and Web; `site` is network-only.
-- `site --resolveto <IPV4>` overrides the TCP connect address but keeps the URL host for HTTP `Host` and (for HTTPS) SNI/cert validation.
+- `site --resolveto <IPV4>` overrides the TCP connect addresss but keeps the URL host for HTTP `Host` and (for HTTPS) SNI/cert validation.
 
 ## Program Flow
 
